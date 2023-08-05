@@ -1,6 +1,5 @@
 import React from 'react'
-
-
+import Link from 'next/link'
 
 
 // .form_textarea {
@@ -11,7 +10,7 @@ import React from 'react'
 //     @apply w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0;
 //   }
 
-const OrderForm = () => {
+const OrderForm = ({type, post, setPost, submitting, handleSubmit}) => {
     return (
         <div>
 
