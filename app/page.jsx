@@ -8,10 +8,13 @@ const Home = () => {
       <br className="max-md:hidden" />
       <span className="orange_gradient text-center size-medium">Full stop</span>
       </h1>
-      <p className="desc text-center">These wings are really good. You must trust me on this one.</p>
-    
-    <Register/>
 
+      <h3>CTA button to make an account</h3>
+      <h3>CTA button to make an account</h3>
+      <h3>CTA button to make an account</h3>
+
+    
+  
     <Feed/>
     </section>
 
