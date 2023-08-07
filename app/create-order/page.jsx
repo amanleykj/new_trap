@@ -11,12 +11,32 @@ const CreateOrder = () => {
     
     const [ submitting, setSubmitting] = useState(false);
 
-    const [ post, setPost ] = useState({
+    const [ order, setOrder ] = useState({
         order : '',
         tag : ''
     })
 
     const createOrder = async (e) => {
+        e.preventDefault();
+        setSubmitting(true);
+
+        try {
+            const response = await fetch('/api/order/new', {
+                method : 'POST',
+                body : JSON.stringify({
+                    combo : order.combo,
+                    sauce : order.sauce,
+                    side : order.side,
+                    drink : order.drink,
+                    notes : order.notes,
+                    userId : session.user.id,
+                    tag : order.tag
+                })
+            })
+
+        } catch (error) {
+
+        }
 
     }
 
@@ -26,8 +46,8 @@ const CreateOrder = () => {
 
         <OrderForm2
         type = 'Create'
-        post = {post}
-        setPost = {setPost}
+        order = {order}
+        setOrder = {setOrder}
         submitting = {submitting}
         handleSubmit = {createOrder}
         />

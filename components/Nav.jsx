@@ -61,7 +61,7 @@ const Nav = () => {
                     <Image
                         src = { session?.user.image } 
                         className='rounded-full' 
-                        width={45} 
+                        width=  {45} 
                         height={45} 
                         alt = "profile image here"/>
                 </Link>
@@ -71,27 +71,27 @@ const Nav = () => {
             : 
             (
             <>
-                {providers &&
-                    Object.values(providers).map((provider) =>
-                    (
-                    <button 
-                        type = "button" 
-                        key = {provider.name}
-                        onClick={() => signIn(provider.id)}
-                        className='black_btn'>
-                    Sign In
-                    </button>
-                    ))
-                }
-            
-            <br />
-            <br />
-            <div className='flex gap-3 md:gap-5'>
-                <Link href = "/login">Log In</Link>
-                {/* <button type = "button" className="outline_btn" onClick={signIn}>Log In</button> */}
-                <Link href = "/register">Make an Account</Link>
-                {/* <button type = "button" className="outline_btn" onClick={signIn}>Logout</button> */}
-            </div>
+                <div className='flex gap-3 md:gap-5'>
+                    {providers &&
+                        Object.values(providers).map((provider) =>
+                        (
+                        <button 
+                            type = "button" 
+                            key = {provider.name}
+                            onClick={() => signIn(provider.id)}
+                            className='black_btn'>
+                        Sign In
+                        </button>
+                        ))
+                    }
+                </div>
+
+                <div className='flex gap-3 md:gap-5'>
+                    <Link href = "/login">Log In</Link>
+                    {/* <button type = "button" className="outline_btn" onClick={signIn}>Log In</button> */}
+                    <Link href = "/register">Make an Account</Link>
+                    {/* <button type = "button" className="outline_btn" onClick={signIn}>Logout</button> */}
+                </div>
             </>
             )
             }
