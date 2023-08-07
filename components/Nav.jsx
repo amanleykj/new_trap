@@ -80,7 +80,7 @@ const Nav = () => {
                             key = {provider.name}
                             onClick={() => signIn(provider.id)}
                             className='black_btn'>
-                        Sign In
+                        Sign In with Google
                         </button>
                         ))
                     }

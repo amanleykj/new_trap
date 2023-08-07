@@ -30,12 +30,7 @@ const OrderSchema = new Schema({
 
     notes : {
         type : String
-    },
-
-    tag : {
-        type : String
     }
-
 })
 
 const Order = models.Order || model("Order", OrderSchema);

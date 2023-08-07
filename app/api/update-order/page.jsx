@@ -1,24 +1,37 @@
 'use client'
 
-import { useState } from 'react'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import OrderForm2 from '@components/OrderForm2'
+import { useEffect, useState } from 'react'
 
-const CreateOrder = () => {
+import { useRouter, useSearchParams } from 'next/navigation'
+import OrderForm2 from '@components/OrderForm2'
+import { isDynamicMetadataRoute } from 'next/dist/build/analysis/get-page-static-info'
+
+const UpdateOrder = () => {
 
     const router = useRouter();
 
     const { data : session } = useSession(); 
+
+    const searchParams = useSearchParams();
+
+    const orderId = searchParams.get('id');
     
     const [ submitting, setSubmitting] = useState(false);
 
-
-    // COMMENTED OUT FOR NOW; TRY TO REATTEMPT THIS LATER
-    // var today = new Date();
-    // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    // var dateTime = date+' '+time;
+    useEffect(() => {
+        const getOrderDetails = async () => {
+            const response = await fetch(`/api/order/${orderId}`)
+            const data = await response.json();
+            setOrder({
+                combo : data.combo,
+                sauce : data.sauce,
+                side : data.side,
+                drink : data.drink,
+                notes : data.notes
+        })
+        }
+        if(orderId) getOrderDetails()
+    }, [orderId])
     
     const [ order, setOrder ] = useState({
         combo : '',
@@ -41,7 +54,8 @@ const CreateOrder = () => {
                     side : order.side,
                     drink : order.drink,
                     notes : order.notes,
-                    userId : session.user.id
+                    userId : session.user.id,
+                    timestamps : dateTime
                 })
             })
             if(response.ok) {
@@ -56,21 +70,17 @@ const CreateOrder = () => {
         }
     }
 
-    return (
-        
-    <div>
 
-        <OrderForm2
-        type = 'Create'
-        order = {order}
-        setOrder = {setOrder}
-        submitting = {submitting}
-        handleSubmit = {createOrder}
-        />
-
-    </div>
+  return (
+    <OrderForm2
+    type = 'Update'
+    order = {order}
+    setOrder = {setOrder}
+    submitting = {submitting}
+    handleSubmit = {createOrder}
+    />
     
-    )
+  )
 }
 
-export default CreateOrder;
+export default UpdateOrder

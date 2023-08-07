@@ -1,9 +1,41 @@
-import React from 'react'
+'use client'
 
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 
 const Register = () => {
+
+  const [ providers, setProviders ] = useState(null);
+
+  useEffect(() => {
+    const setUpProviders = async () => {
+        const response = await getProviders();
+        setProviders(response);
+    }
+
+    setUpProviders();
+}, [])
+
   return (
     <div>
+
+      <div className='flex gap-3 md:gap-5'>
+                    {providers &&
+                        Object.values(providers).map((provider) =>
+                        (
+                        <button 
+                            type = "button" 
+                            key = {provider.name}
+                            onClick={() => signIn(provider.id)}
+                            className='black_btn text-red-500'>
+                        Register using Google account
+                        </button>
+                        ))
+                    }
+      </div>
       
       <form class="w-full max-w-lg">
   <div class="flex flex-wrap -mx-3 mb-6">
@@ -12,7 +44,7 @@ const Register = () => {
         First Name
       </label>
       <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane"/>
-      <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+     
     </div>
     <div class="w-full md:w-1/2 px-3">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
