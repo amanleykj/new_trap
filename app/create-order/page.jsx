@@ -8,12 +8,19 @@ import OrderForm from '@components/OrderForm'
 import OrderForm2 from '@components/OrderForm2'
 
 const CreateOrder = () => {
+
+    const router = useRouter();
+
+    const { data : session } = useSession(); 
     
     const [ submitting, setSubmitting] = useState(false);
 
     const [ order, setOrder ] = useState({
-        order : '',
-        tag : ''
+        combo : '',
+        sauce : '',
+        side : '',
+        drink : '',
+        notes: ''
     })
 
     const createOrder = async (e) => {
@@ -29,15 +36,19 @@ const CreateOrder = () => {
                     side : order.side,
                     drink : order.drink,
                     notes : order.notes,
-                    userId : session.user.id,
-                    tag : order.tag
+                    userId : session.user.id
                 })
             })
+            if(response.ok) {
+                router.push('/')
+            }
 
         } catch (error) {
-
+            console.log(error)
         }
-
+        finally {
+            setSubmitting(false);
+        }
     }
 
     return (

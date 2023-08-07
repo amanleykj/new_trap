@@ -3,24 +3,22 @@ import Order from '@models/Order';
 
 
 export const POST = async ( request, response ) => {
-    const { userId, combo, sauce, side, drink, notes, tag } = await request.json();
+    
+    const { userId, combo, sauce, side, drink, notes } = await request.json();
 
     try {
         await connectToDb();
-        const newPrompt = new Prompt({ 
+        const newOrder = new Order({ 
             creator : userId,
             combo,
             sauce,
             side,
             drink,
-            notes,
-            tag
+            notes
         })
-
         // "lambda function" means that it'll die once it does its job
-
-        await newPrompt.save();
-        return new Response(JSON.stringify(newPrompt), {
+        await newOrder.save();
+        return new Response(JSON.stringify(newOrder), {
             status : 201
         })
 

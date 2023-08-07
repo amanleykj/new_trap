@@ -1,4 +1,3 @@
-
 import { typescript } from '@next.config'
 import Link from 'next/link'
 
@@ -11,8 +10,7 @@ const OrderForm2 = ({type, order, setOrder, submitting, handleSubmit}) => {
                 </span>
             </h1>
             <p className='desc text-left max-w-md'>
-                {type} and share your orders with other trappas and trappets,
-                and really get your food on.
+                {type} an order, and then share it with other trappas and trappets
             </p>
 
             <form onSubmit={handleSubmit} className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism'
@@ -21,32 +19,37 @@ const OrderForm2 = ({type, order, setOrder, submitting, handleSubmit}) => {
                     <span className='font-satoshi font-semibold text-base text-gray-700'>
                     Combo Choice
                     </span>
-                    <select class="block appearance-none w-full bg-gray-200 border border-gray-200 
+                    <select
+                    required 
+                    className="block appearance-none w-full bg-gray-200 border border-gray-200 
                     text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white 
-                    focus:border-gray-500" id="grid-state">
-                    <option>6-piece</option>
-                    <option>10-piece</option>
-                    <option>15-piece</option>
-                    </select>
-
-                    {/* This is the code from the tutorial; keep this for future textarea inputs */}
-                    {/* <textarea value={order.comboChoice}
-                    onChange={(e) => setOrder({...order, order : e.target.value })}
-                    placeholder='Your order is here'
-                    required
-                    className='form_textarea'
+                    focus:border-gray-500" 
+                    id="grid-state"
+                    value = {order.combo}
+                    onChange={(e) => setOrder({...order, combo : e.target.value})}
                     >
-                    </textarea> */}
+                    <option>-</option>
+                    <option value = "6p">6-piece</option>
+                    <option value = "10p">10-piece</option>
+                    <option value = "15p">15-piece</option>
+                    </select>
                 </div>
 
                 <div className="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
                         Sauce
                         </label>
-                        <select class="block appearance-none w-full bg-gray-200 border border-gray-200 
+                        <select 
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 
                         text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white 
-                        focus:border-gray-500" id="grid-state">
+                        focus:border-gray-500" 
+                        id="grid-state"
+                        required
+                        value = {order.sauce}
+                        onChange={(e) => setOrder({...order, sauce : e.target.value})}
+                        >
+                        <option>-</option>
                         <option>BMF</option>
                         <option>DSGB</option>
                         <option>Exotics</option>
@@ -69,17 +72,59 @@ const OrderForm2 = ({type, order, setOrder, submitting, handleSubmit}) => {
                     </div>
                 </div>
 
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
                 Side
                 </label>
-                <select class="block appearance-none w-full bg-gray-200 border border-gray-200 
+                <select 
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 
                 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white 
-                focus:border-gray-500" id="grid-state">
+                focus:border-gray-500" 
+                id="grid-state"
+                required
+                value = {order.side}
+                onChange={(e) => setOrder({...order, side : e.target.value})}
+                >
+                <option>-</option>
                 <option>French Fries</option>
                 <option>Mac & Cheese</option>
                 <option>Baked Beans</option>
                 </select>
+            </div>
+
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+                Drink
+                </label>
+                <select 
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 
+                text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white 
+                focus:border-gray-500" 
+                id="grid-state"
+                required
+                value = {order.drink}
+                onChange={(e) => setOrder({...order, drink : e.target.value})}
+                >
+                <option>-</option>
+                <option>Sprite</option>
+                <option>Coke</option>
+                <option>Trap Juice</option>
+                </select>
+            </div>
+
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+                    Notes
+                    </label>
+                <textarea
+                value = {order.notes}
+                onChange={(e) => setOrder({...order, notes : e.target.value})}
+                placeholder='write any special requests or other notes about your order here'
+                className='form_textarea'
+                >
+
+                </textarea>
+
             </div>
 
                 <div className='flex-end mx-3 mb-5 gap-4'>
