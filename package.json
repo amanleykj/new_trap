@@ -8,6 +8,17 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false,
+    "child_process" : false,
+    "console" : false,
+    "async_hooks" : false,
+    "diagnostics_channel" : false,
+    "net" : false,
+    "perf_hooks" : false
+  },
   "dependencies": {
     "autoprefixer": "10.4.14",
     "bcrypt": "^5.1.0",

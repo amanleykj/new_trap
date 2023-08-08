@@ -45,6 +45,12 @@ const Nav = () => {
             (
             <div className='flex gap-3 md:gap-5'>
                 <Link 
+                    href = "/profile"
+                    className='black_btn'>
+                My Profile
+                </Link>
+                
+                <Link 
                     href = "/create-order"
                     className='black_btn'>
                 Create Order

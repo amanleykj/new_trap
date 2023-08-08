@@ -3,7 +3,7 @@ import Order from '@models/Order';
 
 
 // GET
-export const GET = async ( request, params ) => {
+export const GET = async ( request, {params} ) => {
     try {
         await connectToDb();
         const order = await Order.findById( params.id ).populate('creator');
@@ -20,7 +20,7 @@ export const GET = async ( request, params ) => {
 }
 
 // UPDATE
-export const PATCH = async ( request, params ) => {
+export const PATCH = async ( request, {params} ) => {
     const { combo, sauce, side, drink, notes } = await request.json();
 
     try {

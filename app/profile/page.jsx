@@ -13,13 +13,25 @@ const MyProfile = () => {
 
     const [ orders, setOrders ] = useState([])
 
-    const handleEdit = ({ order }) => {
+    const handleEdit = (order) => {
         router.push(`/update-order?id=${order._id}`)
 
     }
 
-    const handleDelete = ({ order }) => {
-
+    const handleDelete = async (order) => {
+        const hasConfirmed = confirm("Are you sure you want to delete this order? There's no going back if you click this button.")
+        if(hasConfirmed) {
+            try {
+                await fetch(`/api/order/${order._id.toString()}`, {
+                    method : 'DELETE'
+                });
+                const filteredOrders = orders.filter((o) => o._id  !== order._id);
+                setOrders(filteredOrders)
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }
     }
 
     useEffect(() => {
