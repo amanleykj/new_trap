@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react'
+'use client'
+
+import { useEffect, useState } from 'react'
 import Register from '@components/Register'
 
 const RegistrationPage = () => {
@@ -11,11 +13,9 @@ const RegistrationPage = () => {
     username : ''
   })
 
-  const [ buttonDisabled, setButtonDisabled ] = React.useState(false);
+  const [ buttonDisabled, setButtonDisabled ] = useState(false);
 
-  const onSignUp = async () => {
-
-  }
+  const [ submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if(user.email.length > 3 && user.password.length > 7 && user.username.length > 3 ) {
@@ -62,6 +62,7 @@ const RegistrationPage = () => {
           user = { user }
           setUser = { setUser }
           submitting = { submitting }
+          buttonDisabled = { buttonDisabled }
           handleSubmit = { createAccount }
         />
 
