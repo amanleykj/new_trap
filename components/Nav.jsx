@@ -31,7 +31,7 @@ const Nav = () => {
             width={50} 
             height={50} 
             className='object-contain rounded-full'/>
-            <p className='logo_text'>TraPWangZ</p>
+            <p className='logo_text'>TraPWanGz</p>
         </Link>
 
         {/* below can be used to test if session, or other variables, are active or populated */}

@@ -12,12 +12,12 @@
     "fs": false,
     "os": false,
     "path": false,
-    "child_process" : false,
-    "console" : false,
-    "async_hooks" : false,
-    "diagnostics_channel" : false,
-    "net" : false,
-    "perf_hooks" : false
+    "child_process": false,
+    "console": false,
+    "async_hooks": false,
+    "diagnostics_channel": false,
+    "net": false,
+    "perf_hooks": false
   },
   "dependencies": {
     "autoprefixer": "10.4.14",
@@ -27,8 +27,10 @@
     "next": "13.4.12",
     "next-auth": "^4.22.3",
     "postcss": "8.4.27",
+    "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "rxjs": "^7.8.1",
     "tailwindcss": "3.3.3"
   }
 }

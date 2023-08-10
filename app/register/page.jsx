@@ -18,7 +18,7 @@ const RegistrationPage = () => {
   const [ submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if(user.email.length > 3 && user.password.length > 7 && user.username.length > 3 ) {
+    if(user.email.length < 5 && user.password.length < 7 && user.username.length < 3 ) {
       setButtonDisabled(true)
     }
     else {

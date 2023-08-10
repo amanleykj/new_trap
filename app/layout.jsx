@@ -4,7 +4,7 @@ import Provider from '@components/Provider'
 import Link from 'next/link'
 
 export const metadata = {
-    title : "TraPWangZ",
+    title : "TraPWanGz",
     description : "Best wings in the 206/253."
 }
 
@@ -21,7 +21,6 @@ const RootLayout = ({children}) => {
             <main className='app'>
               <Nav/>
                 {children}
-            
             </main>
             
           </Provider>
