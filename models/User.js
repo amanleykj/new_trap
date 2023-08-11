@@ -13,25 +13,37 @@ const UserSchema = new Schema({
 
     email : {
         type : String,
-        unique : [ true, "This email already exists in our database."],
-        required : [ true, "You need an email to register."]
+        required : [ true, "You need an email to register."],
+        unique : [ true, "This email already exists in our database."]
     },
 
     password : {
         type : String,
-        required : [ true, "You need a password."]
+        required : [ true, "You need a password."],
+        min : [ 6, "This password must be at least six characters long."]
     },
     
     username : {
         type : String,
+        required : [ true, "You need a username."],
         unique : [ true, "You need to create a username."],
-        match : [/^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, 
-        "Username is invalid. It must be between 5 and 15 characters, and be unique." ]
+        match : [/^(?=.{5,16}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, 
+        "Username is invalid. It must be between 5 and 16 characters, and be unique." ]
     },
 
     image : {
         type : String
-    }
+    },
+
+    isVerified : {
+        type : Boolean,
+        default :  false
+    },
+
+    forgotPasswordToken : String,
+    forgotPasswordTokenExpiry : Date,
+    verifyToken : String,
+    verifyTokenExpiry : Date
 
 })
 

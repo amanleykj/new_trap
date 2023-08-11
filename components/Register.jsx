@@ -6,28 +6,34 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
-import { Nav, Alert } from '@components/Alert';
-import { alertService } from 'services';
+import axios from 'axios'
 
 const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccount }) => {
 
   const [ providers, setProviders ] = useState(null);
-
   const router = useRouter();
+  const [ loading, setLoading ] = useState(true)
+  const [ confirmPassword, setConfirmPassword ] = useState('')
+  const { data : session } = useSession();
 
-  const [ loading, setLoading ] = useState(false)
 
   const onSignUp = async () => {
     try {
-
+      setLoading(true);
+      const response = await axios.post("/api/new_user", user);
+      console.log("Signup success here.", response.data);
+      session
+      router.push('/');
     }
-    catch {
-
+    catch (error) {
+      console.log("Signup has failed.", error.message);
+      toast.error(error.message);
+    }
+    finally {
+      setLoading(false);
     }
   }
   
-  const [ confirmPassword, setConfirmPassword ] = useState('')
-
   useEffect(() => {
     const setUpProviders = async () => {
         const response = await getProviders();
@@ -38,6 +44,7 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
 
   return (
     <div>
+      <h1>{loading ? "Sign up now" : "Processing now..."}</h1>
 
       <div className='flex gap-3 md:gap-5'>
                     {providers &&
@@ -69,7 +76,7 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
       value = {user.first_name}
       onChange={(e) => setUser({...user, first_name : e.target.value})}
       placeholder="Jane"/>
-     
+    
     </div>
     <div className="w-full md:w-1/2 px-3">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
@@ -99,7 +106,20 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
       onChange={(e) => setUser({...user, username : e.target.value})}
       placeholder="Doe"/>
     </div>
-  
+
+    <div className="w-full md:w-1/2 px-3">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+        Email
+      </label>
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 
+      border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none 
+      focus:bg-white focus:border-gray-500" 
+      id="grid-last-name" 
+      type="text" 
+      value = {user.email}
+      onChange={(e) => setUser({...user, email : e.target.value})}
+      placeholder="chosenone@betty.com"/>
+    </div>
 
   <div className="flex flex-wrap -mx-3 mb-6">
     <div className="w-full px-3">
@@ -113,12 +133,12 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
       type="password" 
       value = {user.password}
       onChange={(e) => setUser({...user, password : e.target.value})}
-      placeholder="************"/>
-      <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
+      placeholder="******"/>
+      <p className="text-gray-600 text-xs italic">Make sure this is at least six characters long.</p>
     </div>
   </div>
 
-  <div className="flex flex-wrap -mx-3 mb-6">
+  {/* <div className="flex flex-wrap -mx-3 mb-6">
     <div className="w-full px-3">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
         Repeat Password
@@ -135,11 +155,11 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
       placeholder="************"/>
       
     </div>
-  </div>
+  </div> */}
 
 
 {/* consider just deleting the section below; the Order model shoud specify dropoff location */}
-  <div className="flex flex-wrap -mx-3 mb-2">
+  {/* <div className="flex flex-wrap -mx-3 mb-2">
     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
         City
@@ -165,44 +185,33 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
       </label>
       <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="98058"/>
     </div>
-  </div>
-  <button 
-  className='bg-blue-500 hover:bg-blue-700 text-white 
-  font-bold py-2 px-4 rounded text-center btn'
-  onClick={onSignUp}
+  </div> */}
+  <div
   >{ buttonDisabled ? 
-  (<>
-      <button 
-          type = "button" 
-          onClick={()=> {
-              alertService.warn('Please modify your inputs. This box will change colors.')}}
-          className="mt-5 w-full red_btn">
-      Register Now
-      </button>
-  </> 
+  ( <>
+      <p className='bg-red-500 hover:bg-red-700 text-white 
+      font-bold py-2 px-4 rounded text-center btn'
+      >
+      Please finish filling out the form
+      </p>
+    </> 
   )
-    
   : 
-
   (
-<>
+    <>
       <button 
-          type = "button" 
-          onClick={()=> {
-              setToggleDropdown(false);
-              signOut();
-              }}
-          className="mt-5 w-full black_btn">
-      Register Now
+        type = "button"
+        onClick={onSignUp} 
+        className="mt-5 w-full black_btn">
+        Register Account
       </button>
-  </>
+    </>
 
   )
   }
+    </div>
 
-    </button>
 </form>
-
 
     </div>
   )

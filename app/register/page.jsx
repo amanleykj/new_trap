@@ -1,10 +1,12 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Register from '@components/Register'
 
 const RegistrationPage = () => {
 
+  const router = useRouter()
   const [ user, setUser ] = useState({
     first_name : '',
     last_name : '',
@@ -12,14 +14,15 @@ const RegistrationPage = () => {
     password : '',
     username : ''
   })
-
   const [ buttonDisabled, setButtonDisabled ] = useState(false);
-
   const [ submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if(user.email.length < 5 && user.password.length < 7 && user.username.length < 3 ) {
+    if( user.password.length < 6 ) {
       setButtonDisabled(true)
+      if( user.username.length < 5 ) {
+        setButtonDisabled(true)
+      }
     }
     else {
       setButtonDisabled(false);
@@ -51,6 +54,9 @@ const RegistrationPage = () => {
         setSubmitting(false);
     }
 }
+
+
+// Considering not using the Register component below, in order to follow tutorial correctly
 
   return (
     <div>
