@@ -7,7 +7,6 @@ import { NextRequest, NextResponse } from "next/server";
 // other recommendation is bcryptjs from bcryptjs
 import jwt from 'jsonwebtoken'
 
-
 connectToDb();
 
 export async function POST( request ) {
@@ -33,7 +32,7 @@ export async function POST( request ) {
             username : user.username,
             email : user.email
         }
-        // create token
+        // create the actual token
         const token = jwt.sign(
             tokenData, process.env.TOKEN_SECRET, 
             {expiresIn : "1d"}, 

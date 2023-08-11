@@ -38,10 +38,16 @@ export async function POST( request ) {
         const savedUser = await newUser.save()
         console.log(savedUser)
 
+        const sessionUser = await User.findOne({
+        email : session.user.email
+        })
+        session.user.id = sessionUser._id.toString();
+
         return NextResponse.json({
             message : "User created successfully.",
             success : true,
-            savedUser
+            savedUser,
+            session
         })
 
     }

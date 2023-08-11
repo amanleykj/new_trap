@@ -27,7 +27,6 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
     }
     catch (error) {
       console.log("Signup has failed.", error.message);
-      toast.error(error.message);
     }
     finally {
       setLoading(false);
@@ -46,19 +45,19 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
     <div>
       <h1>{loading ? "Sign up now" : "Processing now..."}</h1>
 
-      <div className='flex gap-3 md:gap-5'>
-                    {providers &&
-                        Object.values(providers).map((provider) =>
-                        (
-                        <button 
-                            type = "button" 
-                            key = {provider.name}
-                            onClick={() => signIn(provider.id)}
-                            className='black_btn text-red-500'>
-                        Register using Google account
-                        </button>
-                        ))
-                    }
+      <div className='flex gap-3 md:gap-5 '>
+        {providers &&
+            Object.values(providers).map((provider) =>
+            (
+            <button 
+                type = "button" 
+                key = {provider.name}
+                onClick={() => signIn(provider.id)}
+                className='black_btn text-red-500'>
+            Click here to register with Google account
+            </button>
+            ))
+        }
       </div>
       
       <form className="w-full max-w-lg">

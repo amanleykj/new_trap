@@ -1,6 +1,7 @@
 import { Schema, model, models } from 'mongoose';
 
 const UserSchema = new Schema({
+
     first_name : {
         type : String,
         required : [ true, "Your first name is required."]
@@ -45,7 +46,7 @@ const UserSchema = new Schema({
     verifyToken : String,
     verifyTokenExpiry : Date
 
-})
+}, {timestamps : true} )
 
 const User = models.User || model("User", UserSchema);
 
