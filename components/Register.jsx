@@ -17,21 +17,22 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
   const { data : session } = useSession();
 
 
-  const onSignUp = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.post("/api/new_user", user);
-      console.log("Signup success here.", response.data);
-      session
-      router.push('/');
-    }
-    catch (error) {
-      console.log("Signup has failed.", error.message);
-    }
-    finally {
-      setLoading(false);
-    }
-  }
+  // const onSignUp = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const response = await axios.post("/api/new_user", user);
+  //     console.log("Signup success here.", response.data);
+  //     session
+  //     router.push('/');
+  //     console.log("THIS WENT THE COMPONENT ROUTE.")
+  //   }
+  //   catch (error) {
+  //     console.log("Signup has failed.", error.message);
+  //   }
+  //   finally {
+  //     setLoading(false);
+  //   }
+  // }
   
   useEffect(() => {
     const setUpProviders = async () => {
@@ -63,11 +64,11 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
       <form className="w-full max-w-lg">
   <div className="flex flex-wrap -mx-3 mb-6">
     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
         First Name
       </label>
       <input 
-      class="appearance-none block w-full bg-gray-200 text-gray-700 
+      className="appearance-none block w-full bg-gray-200 text-gray-700 
       border border-red-500 rounded py-3 px-4 mb-3 leading-tight 
       focus:outline-none focus:bg-white" 
       id="grid-first-name" 
@@ -78,7 +79,7 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
     
     </div>
     <div className="w-full md:w-1/2 px-3">
-      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
         Last Name
       </label>
       <input className="appearance-none block w-full bg-gray-200 text-gray-700 
@@ -92,7 +93,9 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
     </div>
   </div>
 
-  <div className="w-full md:w-1/2 px-3">
+
+{/* Taken out; instead want to auto-generate username based on other inputs */}
+  {/* <div className="w-full md:w-1/2 px-3">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
         Username
       </label>
@@ -104,10 +107,10 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
       value = {user.username}
       onChange={(e) => setUser({...user, username : e.target.value})}
       placeholder="Doe"/>
-    </div>
+    </div> */}
 
     <div className="w-full md:w-1/2 px-3">
-      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
         Email
       </label>
       <input className="appearance-none block w-full bg-gray-200 text-gray-700 
@@ -122,7 +125,7 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
 
   <div className="flex flex-wrap -mx-3 mb-6">
     <div className="w-full px-3">
-      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
         Password
       </label>
       <input className="appearance-none block w-full bg-gray-200 text-gray-700 
@@ -200,7 +203,7 @@ const Register = ({ type, user, setUser, submtting, buttonDisabled, createAccoun
     <>
       <button 
         type = "button"
-        onClick={onSignUp} 
+        onClick={ createAccount } 
         className="mt-5 w-full black_btn">
         Register Account
       </button>

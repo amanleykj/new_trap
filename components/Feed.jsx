@@ -2,27 +2,26 @@
 
 import { useState, useEffect } from 'react'
 import PromptCard from '@components/PromptCard'
+import PromptCardList from '@components/PromptCardList'
 
-const PromptCardList = ({ data, handleTagClick }) => {
-  return (
-  <div className='mt-16 prompt_layout'>
-    {data.map(( value, index )  => (
-      <PromptCard
-      key = {value._id}
-      order = {value}
-      handleTagClick = {handleTagClick}
-      />
-    ))}
-  </div>
-  )
-}
+// const PromptCardList = ({ data, handleTagClick }) => {
+//   return (
+//   <div className='mt-16 prompt_layout'>
+//     {data.map(( value, index )  => (
+//       <PromptCard
+//       key = {value._id}
+//       order = {value}
+
+//       />
+//     ))}
+//   </div>
+//   )
+// }
 
 const Feed = () => {
 
   const [ searchText, setSearchText] = useState("");
-
   const [ orders, setOrders ] = useState([]);
-
   const handleSearchChange = (e) => {
     
   }

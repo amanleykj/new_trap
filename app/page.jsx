@@ -9,9 +9,6 @@ const Home = () => {
 
       </h1>
 
-
-      <h3>CTA button here</h3>
-
     <Feed/>
     </section>
 

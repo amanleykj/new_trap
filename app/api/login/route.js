@@ -35,8 +35,8 @@ export async function POST( request ) {
         // create the actual token
         const token = jwt.sign(
             tokenData, process.env.TOKEN_SECRET, 
-            {expiresIn : "1d"}, 
-            SameSite = None
+            SameSite = None,
+            { expiresIn : "1d" }
             )
         // took away the await above, as well as the ! after the TOKEN_SECRET; problem?
         const response = NextResponse.json({

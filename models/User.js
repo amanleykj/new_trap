@@ -52,17 +52,6 @@ const User = models.User || model("User", UserSchema);
 
 export default User;
 
-
-
-
-
-
-
-
-
-
-
-
 // code used from MERN stack with CD; may be applicable here; check for similarities
 // ********************
 // const mongoose = require('mongoose')

@@ -1,7 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from 'next-auth/providers/google';
 import { connectToDb } from "@utils/database";
-import { connect } from "mongoose";
 import User from '@models/User'
 
 const handler = NextAuth({
@@ -34,7 +33,9 @@ const handler = NextAuth({
                         name : profile.name,
                         email : profile.email,
                         username : profile.name.replace(" ", "").toLowerCase(),
-                        image : profile.picture
+                        image : profile.picture,
+                        createdAt : "123_date_here_now-created",
+                        updatedAt : "123_date_here_now-updated"
                     })
                 }
                 return true;
