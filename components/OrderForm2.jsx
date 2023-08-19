@@ -12,9 +12,9 @@ const OrderForm2 = ({ type, order, setOrder, submitting, handleSubmit }) => {
                 {type} an order, and then share it with other trappas and trappets
             </p>
 
-            <form onSubmit={handleSubmit} className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism'
+            <form onSubmit={handleSubmit} className='mt-10 w-full max-w-2xl flex flex-col gap-1 glassmorphism'
             >
-                <div>
+                <div className="flex flex-wrap -mx-3 mb-1 p-5">
                     <span className='font-satoshi font-semibold text-base text-gray-700'>
                     Combo Choice
                     </span>
@@ -34,11 +34,11 @@ const OrderForm2 = ({ type, order, setOrder, submitting, handleSubmit }) => {
                     </select>
                 </div>
 
-                <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+                <div className="flex flex-wrap -mx-3 mb-1 p-5">
+
+                        <span className='font-satoshi font-semibold text-base text-gray-700'>
                         Sauce
-                        </label>
+                        </span>
                         <select 
                         className="block appearance-none w-full bg-gray-200 border border-gray-200 
                         text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white 
@@ -68,13 +68,13 @@ const OrderForm2 = ({ type, order, setOrder, submitting, handleSubmit }) => {
                         <option>Ranch</option>
                         <option>24k</option>
                         </select>
-                    </div>
+                    
                 </div>
 
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+            <div className="flex flex-wrap -mx-3 mb-1 p-5">
+                <span className='font-satoshi font-semibold text-base text-gray-700'>
                 Side
-                </label>
+                </span>
                 <select 
                 className="block appearance-none w-full bg-gray-200 border border-gray-200 
                 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white 
@@ -91,10 +91,10 @@ const OrderForm2 = ({ type, order, setOrder, submitting, handleSubmit }) => {
                 </select>
             </div>
 
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+            <div className="flex flex-wrap -mx-3 mb-1 p-5">
+                <span className='font-satoshi font-semibold text-base text-gray-700'>
                 Drink
-                </label>
+                </span>
                 <select 
                 className="block appearance-none w-full bg-gray-200 border border-gray-200 
                 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white 
@@ -111,10 +111,10 @@ const OrderForm2 = ({ type, order, setOrder, submitting, handleSubmit }) => {
                 </select>
             </div>
 
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
-                    Notes
-                    </label>
+            <div className="flex flex-wrap -mx-3 mb-1 p-5">
+                <span className='font-satoshi font-semibold text-base text-gray-700'>
+                Notes
+                </span>
                 <textarea
                 value = {order.notes}
                 onChange={(e) => setOrder({...order, notes : e.target.value})}
@@ -131,7 +131,7 @@ const OrderForm2 = ({ type, order, setOrder, submitting, handleSubmit }) => {
                 <button 
                 type='submit'
                 disabled={submitting}
-                className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white'
+                className='px-5 py-4 text-big bg-primary-orange rounded hover:rounded-lg rounded-full text-white'
                 >
                     {submitting ? `${type}...` : type}
                 </button>

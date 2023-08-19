@@ -42,11 +42,11 @@ const Feed = () => {
       <form className="relative w-full flex-center">
         <input 
         type="text" 
-        placeholder='Search for orders here' 
+        placeholder='Send a shoutout!' 
         value={searchText} 
         onChange={handleSearchChange} 
         required
-        className='search_input peer'
+        className='s  earch_input peer'
         />
       </form>
 

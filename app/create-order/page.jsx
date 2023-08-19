@@ -65,7 +65,7 @@ const CreateOrder = () => {
         order = {order}
         setOrder = {setOrder}
         submitting = {submitting}
-        handleSubmit = {createOrder}
+        createOrder = {createOrder}
         />
 
     </div>

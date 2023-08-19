@@ -90,6 +90,10 @@
   @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
 }
 
+.outline_link {
+  @apply rounded-full border border-black bg-transparent py-1.5 px-3 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;  
+}
+
 .btn {
   @apply font-bold py-2 px-4 rounded;
 }
@@ -100,8 +104,21 @@
   @apply bg-blue-700;
 }
 
+.footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(165, 160, 160, 0.399);
+  color: white;
+  text-align: center;
+}
+
 .head_text {
   @apply mt-5 text-5xl font-extrabold leading-[1.15] sm:text-6xl;
+}
+
+.smallhead_text {
+  @apply mt-5 text-5xl font-bold leading-[3.15] sm:text-3xl;
 }
 
 .orange_gradient {

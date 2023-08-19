@@ -2,7 +2,7 @@ import { connectToDb } from "@utils/database";
 import User from '@models/User';
 import bcrypt from 'bcrypt'
 import { NextRequest, NextResponse } from "next/server";
-import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth/react";
 // other recommendation is bcryptjs from bcryptjs
 
 
@@ -13,7 +13,8 @@ export async function POST( request ) {
     try {
         const reqBody = await request.json()
         const { first_name, last_name, username, email, password } = reqBody
-        const { data : session } = useSession();
+        // const { data : session } = getServerSession();
+        // const session = await getServerSession();
 
         console.log(reqBody);
         // check if user already exists
@@ -37,16 +38,16 @@ export async function POST( request ) {
         const savedUser = await newUser.save()
         console.log("New USER HERE: " + savedUser)
 
-        const session = await User.findOne({
-        email : session.user.email
-        })
-        session.user.id = sessionUser._id.toString();
+        // const session = await User.findOne({
+        // email : session.user.email
+        // })
+        // session.user.id = sessionUser._id.toString();
 
         return NextResponse.json({
             message : "User created successfully.",
             success : true,
-            savedUser,
-            session
+            savedUser
+            // session
         })
     }
     catch (error) {

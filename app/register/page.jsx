@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Register from '@components/Register'
+import { getSession } from 'next-auth/client'
 
 const RegistrationPage = () => {
 
@@ -51,17 +52,16 @@ const RegistrationPage = () => {
             body : JSON.stringify({
                 first_name : user.first_name,
                 last_name : user.last_name,
-
                 username : (user.last_name + rando).
                 replace(" ", "").
                 toLowerCase(),
-
                 email : user.email,
                 password : user.password
             })
         })
         if(response.ok) {
             router.push('/')
+            console.log(session)
             console.log("THIS WENT THE PAGE ROUTE")
         }
 
@@ -79,8 +79,7 @@ const RegistrationPage = () => {
 
   return (
     <div>
-        <h1 className='text-center head_text'>Registration page here</h1>
-        <br />
+
 
         <Register
           type = 'Create'
@@ -96,3 +95,13 @@ const RegistrationPage = () => {
 }
 
 export default RegistrationPage
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  return {
+    props : {
+      data : session ? ''
+    }
+  }
+
+}

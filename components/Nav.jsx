@@ -9,15 +9,15 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 const Nav = () => {
 
     const { data : session } = useSession();
+
     const [ providers, setProviders ] = useState(null);
-    const [ toggleDropdown, setToggleDropdown ] = useState(false);
+    const [ toggleDropdown, setToggleDropdown ] = useState(true);
 
     useEffect(() => {
         const setUpProviders = async () => {
             const response = await getProviders();
             setProviders(response);
         }
-
         setUpProviders();
     }, [])
 
@@ -38,20 +38,22 @@ const Nav = () => {
         {/* {alert(providers)} */}
 
         {/* Desktop navigation first */}
+        {/* This is for providers session?.user */}
         <div className='sm:flex hidden'>
             { session?.user ? 
             (
             <div className='flex gap-3 md:gap-5'>
-                <Link 
-                    href = "/profile"
-                    className='black_btn'>
-                My Profile
-                </Link>
                 
                 <Link 
                     href = "/create-order"
                     className='black_btn'>
                 Create Order
+                </Link>
+
+                <Link 
+                    href = "/profile"
+                    className='black_btn'>
+                My Profile
                 </Link>
 
                 <button 
@@ -74,7 +76,7 @@ const Nav = () => {
             ) 
             : 
             (
-            <>
+            <div>
                 <div className='flex gap-3 md:gap-5'>
                     {providers &&
                         Object.values(providers).map((provider) =>
@@ -84,19 +86,16 @@ const Nav = () => {
                             key = {provider.name}
                             onClick={() => signIn(provider.id)}
                             className='black_btn'>
-                        Sign In with Google
+                        Create account with Google
                         </button>
                         ))
                     }
-                </div>
-
-                <div className='flex gap-3 md:gap-5'>
-                    <Link href = "/login">Log In</Link>
+                    <Link className='outline_link' href = "/login">Log In</Link>
                     {/* <button type = "button" className="outline_btn" onClick={signIn}>Log In</button> */}
-                    <Link href = "/register">Make an Account</Link>
+                    <Link className='outline_link' href = "/register">Make an Account</Link>
                     {/* <button type = "button" className="outline_btn" onClick={signIn}>Logout</button> */}
                 </div>
-            </>
+            </div>
             )
             }
         </div>
@@ -104,11 +103,11 @@ const Nav = () => {
         Mobile navigation below */}
         {/* LATEST: The onclick for the image below is immediately going to /profile
         I want for it to show the dropdown menu, with multiple options */}
-        <div className='sm:hidden flex'>
-            {session?.user ? (
+        <div className='sm:hidden flex relative'>
+            { session?.user ? (
                 <div className='flex'>
                     <Image
-                    src = { session?.user.image } 
+                    src = '/assets/icons/trap_small.png' 
                     className='rounded-full' 
                     width={45} 
                     height={45} 
@@ -121,8 +120,9 @@ const Nav = () => {
 
                     <Link 
                         href = "/profile" 
+                        image = { session?.user.image }
                         className='dropdown_link' 
-                        onClick={() => setToggleDropdown(false)}>
+                        onClick={() => setToggleDropdown((false))}>
                     My Profile
                     </Link>
 
