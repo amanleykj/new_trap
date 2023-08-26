@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import Register from '@components/Register'
-import { getSession } from 'next-auth/client'
+import Register from 'components/Register'
+
 
 const RegistrationPage = () => {
 
@@ -95,13 +95,3 @@ const RegistrationPage = () => {
 }
 
 export default RegistrationPage
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  return {
-    props : {
-      data : session ? ''
-    }
-  }
-
-}
